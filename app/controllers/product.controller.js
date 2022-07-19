@@ -1,12 +1,15 @@
-const Product = require("../model/app.model.js");
+const Product = require("../model/product.model.js");
 
 // Create and Save a new Message
 exports.create = (req, res) => {
+  console.log(req.body);
   const product = new Product({
     title: req.body.title,
     price: req.body.price,
     category: req.body.category,
-    color: req.body.color,
+    image: req.body.image,
+    description: req.body.description,
+    rentType: req.body.rentType,
   });
 
   product
@@ -39,6 +42,7 @@ exports.findAll = (req, res) => {
 // Find a single message with a messageId
 exports.findOne = (req, res) => {
   Product.findById(req.params.productId)
+
     .then((data) => {
       if (!data) {
         return res.status(404).send({
@@ -67,7 +71,9 @@ exports.update = (req, res) => {
       title: req.body.title,
       price: req.body.price,
       category: req.body.category,
-      color: req.body.color,
+      images: req.body.images,
+      description: req.body.description,
+      rentType: req.body.rentType,
     },
     { new: true }
   )
